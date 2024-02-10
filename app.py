@@ -12,6 +12,7 @@ from langchain.chains import ConversationalRetrievalChain
 # from langchain_community.chat_models import ChatOpenAI
 from htmlTemplate import css, bot_template, user_template
 from langchain.llms import HuggingFaceHub
+import os
 
 def get_pdf_text(pdf_docs):
     text = ""
@@ -65,8 +66,12 @@ def handle_userinput(user_question):
     # return
 
 def main():
-    load_dotenv()
-    st.set_page_config(page_title="Chat with multiple PDFs", page_icon=":books:")
+    # load_dotenv()
+    os.environ["OPENAI_API_KEY"] = st.secrets["OPENAI_API_KEY"]
+    # test_api = st.secrets["OPENAI_API_KEY"]
+    
+    st.set_page_config(page_title="Chat with multiple PDFs", page_icon=":books:")    
+    # st.set_page_config(page_title=os.environ["OPENAI_API_KEY"], page_icon=":books:")    
 
     st.write(css, unsafe_allow_html=True)
 
